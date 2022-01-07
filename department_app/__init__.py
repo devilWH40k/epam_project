@@ -1,6 +1,6 @@
-from flask import Flask
+from flask import Flask, render_template
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates', static_folder='static')
 
 
 @app.route("/")
@@ -10,8 +10,8 @@ def home():
 
 
 @app.route("/test")
-def about():
-    return "<h1>Test Page</h1>"
+def test():
+    return render_template('departments.html')
 
 
 if __name__ == '__main__':
