@@ -28,9 +28,10 @@ def show_employees(dep_id):
     return render_template('employees.html', employees=employees, dep_name=department.name)
 
 
-@app.route("/employee")
-def employee():
-    return render_template('employee.html')
+@app.route("/employee/<emp_id>")
+def show_employee(emp_id):
+    employee = Employee.query.get_or_404(emp_id)
+    return render_template('employee.html', employee=employee)
 
 
 @app.route("/manage")
