@@ -1,1 +1,3 @@
-from . import views
+"""__init__ file of views package."""
+
+

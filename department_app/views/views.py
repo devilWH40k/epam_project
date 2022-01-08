@@ -1,5 +1,6 @@
 from department_app import app
 from flask import render_template
+from department_app.models import Department, Employee
 
 
 @app.route("/")
