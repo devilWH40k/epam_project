@@ -37,10 +37,14 @@ Departments
                                     </div>
                                     <p class="card-text">{{ department.description[:60]}}...</p>
                                     <div class="d-flex justify-content-between">
-                                        <a href="/departments/{{ department.id }}" class="my-link card-link text-warning">
+                                        <a href="{{ url_for('show_department', dep_id=department.id) }}"
+                                        class="my-link card-link text-warning">
                                             Department link
                                         </a>
-                                        <a href="/employees" class="my-link card-link text-warning">Employees</a>
+                                        <a href="{{ url_for('show_employees', dep_id=department.id) }}"
+                                        class="my-link card-link text-warning">
+                                            Employees
+                                        </a>
                                     </div>
                                 </div>
                             </div>

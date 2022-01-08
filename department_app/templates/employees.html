@@ -5,8 +5,62 @@ Test
 {% endblock %}
 
 {% block body %}
-<div class="container">
-    <h5>Test Employees page</h5>
-    <a href="employee">Employee here</a>
-</div>
+    <div class="d-flex">
+        <h2 class="align-self-center">Welcome to employees page!</h2>
+        <button type="button" class="btn btn-success ms-auto d-flex" style="height: 34px">
+            <a class="nav-link text-white align-self-center" href="{{ url_for('show_departments') }}">Back</a>
+        </button>
+    </div>
+    <hr>
+	<div class="row p-3">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-5 col-xl-5">
+            <p>
+                There is all the information about employees in the <b>{{ dep_name }}</b>.<br>
+                Just click on any employee's link whose detail information u want to get .<br>
+                You can also delete a record about wanted employee.<br>
+                Feel free to add a new one on the manage page!!!<br>
+            </p>
+        </div>
+	</div>
+    <hr>
+    {% if employees %}
+        <!-- Employees cards-->
+		<div class="row">
+            {% for employee in employees %}
+                <div class="col-12 col-md-6 col-lg-4 col-xl-4 col-xxl-3 p-3">
+				    <div class="card text-white bg-dark mx-auto" style="width: 18rem;">
+		  			    <svg class="bd-placeholder-img" width="100%" height="200px" xmlns="http://www.w3.org/2000/svg">
+						    <rect width="100%" height="100%" fill="#868e96"></rect>
+						    <p class="position-absolute text-white" style="margin-left: 30%; margin-top: 35%" >
+                                Employee image
+                            </p>
+					    </svg>
+					    <div class="card-body">
+						    <div class="d-flex justify-content-between">
+				  			    <h5 class="align-self-end">{{ employee.name}} {{employee.surname[:1]}}.</h5>
+							    <div style="font-size: 1.5em; color: white;">
+				 				    <a class="text-white" href="#">
+									    <i class="mb-2 bi bi-x-square-fill"></i>
+								    </a>
+				 			    </div>
+				  		    </div>
+						    <p class="card-text">
+                                {% if employee.brief_inf|length > 25 %}
+                                    {{ employee.brief_inf[:25] }}...
+                                {% else %}
+                                    {{ employee.brief_inf }}
+                                {% endif %}
+                            </p>
+                            <p class="card-text">{{ employee.email }}</p>
+						    <a href="employee.html" class="card-link text-warning">Employee link</a>
+					    </div>
+				    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="p-3">
+            <h5>Looks like this department has no employees yet, try to fill some data first</h5>
+        </div>
+    {% endif %}
 {% endblock %}
