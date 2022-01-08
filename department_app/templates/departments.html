@@ -1,13 +1,55 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Test
+Departments
 {% endblock %}
 
 {% block body %}
-<div class="container">
-    <h5>Test Departments page</h5>
-    <a href="/department">Department here</a>
-    <a href="/employees">Employees here</a>
-</div>
+    <h2>Our Departments</h2>
+	    <span>Feel free to add a new one on the manage page!!!</span>
+		<hr>
+            {% if departments%}
+                <!-- Cards -->
+                <div class="row">
+                    {% for department in departments%}
+                        <div class="col-12 col-md-6 col-lg-6 col-xl-4 col-xxl-3 p-2">
+                            <div class="card mx-auto text-white bg-dark" style="width: 20rem;">
+                                <svg class="bd-placeholder-img" width="100%" height="190" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="100%" height="100%" fill="#868e96"></rect>
+                                    <p class="position-absolute text-white" style="margin-left: 30%; margin-top: 25%" >
+                                        Department image
+                                    </p>
+                                </svg>
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="align-self-end">
+                                            {% if department.name|length > 21 %}
+                                                {{ department.name[:21] + '...' }}
+                                            {% else %}
+                                                {{ department.name }}
+                                            {% endif %}
+                                        </h5>
+                                        <div style="font-size: 1.5em; color: white;">
+                                            <a class="text-white" href="#">
+                                                <i class="mb-2 bi bi-x-square-fill"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <p class="card-text">{{ department.description[:60]}}...</p>
+                                    <div class="d-flex justify-content-between">
+                                        <a href="/departments/{{ department.id }}" class="my-link card-link text-warning">
+                                            Department link
+                                        </a>
+                                        <a href="/employees" class="my-link card-link text-warning">Employees</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <h5>Looks like database is clear, try to fill some data first</h5>
+                <h6 style="color: red;">Could be a trouble with database also</h6>
+            {% endif %}
+
 {% endblock %}
