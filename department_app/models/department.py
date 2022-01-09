@@ -5,7 +5,7 @@ class Department(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=True, nullable=False)
     description = db.Column(db.Text, nullable=False)
-    image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
+    image_file = db.Column(db.String(40), nullable=False, default='default_dep_img/default.png')
     employees = db.relationship('Employee', backref='department', lazy=True)
 
     def __repr__(self):

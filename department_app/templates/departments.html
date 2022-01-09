@@ -14,12 +14,8 @@ Departments
                     {% for department in departments%}
                         <div class="col-12 col-md-6 col-lg-6 col-xl-4 col-xxl-3 p-2">
                             <div class="card mx-auto text-white bg-dark" style="width: 20rem;">
-                                <svg class="bd-placeholder-img" width="100%" height="190" xmlns="http://www.w3.org/2000/svg">
-                                    <rect width="100%" height="100%" fill="#868e96"></rect>
-                                    <p class="position-absolute text-white" style="margin-left: 30%; margin-top: 25%" >
-                                        Department image
-                                    </p>
-                                </svg>
+                                <img width="100%" height="190"
+                                src="{{ url_for('static', filename='img/' + department.image_file) }}">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between">
                                         <h5 class="align-self-end">

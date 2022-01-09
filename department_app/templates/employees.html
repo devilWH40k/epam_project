@@ -29,12 +29,8 @@ Test
             {% for employee in employees %}
                 <div class="col-12 col-md-6 col-lg-4 col-xl-4 col-xxl-3 p-3">
 				    <div class="card text-white bg-dark mx-auto" style="width: 18rem;">
-		  			    <svg class="bd-placeholder-img" width="100%" height="200px" xmlns="http://www.w3.org/2000/svg">
-						    <rect width="100%" height="100%" fill="#868e96"></rect>
-						    <p class="position-absolute text-white" style="margin-left: 30%; margin-top: 35%" >
-                                Employee image
-                            </p>
-					    </svg>
+		  			    <img width="100%" height="240px"
+                        src="{{ url_for('static', filename='img/' + employee.image_file) }}">
 					    <div class="card-body">
 						    <div class="d-flex justify-content-between">
 				  			    <h5 class="align-self-end">{{ employee.name}} {{employee.surname[:1]}}.</h5>

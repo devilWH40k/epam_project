@@ -9,7 +9,7 @@ class Employee(db.Model):
     brief_inf = db.Column(db.Text, nullable=False)
     birth_date = db.Column(db.DateTime, nullable=False)
     salary = db.Column(db.Integer, nullable=False)
-    image = db.Column(db.String(20), nullable=False, default='default.jpg')
+    image_file = db.Column(db.String(40), nullable=False, default='default_emp_img/default.png')
     dep_id = db.Column(db.String(40), db.ForeignKey('department.id'), nullable=False)
 
     def __repr__(self):
