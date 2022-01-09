@@ -9,7 +9,7 @@ Departments
 	    <span>Feel free to add a new one on the manage page!!!</span>
 		<hr>
             {% if departments%}
-                <!-- Cards -->
+                <!-- Card -->
                 <div class="row">
                     {% for department in departments%}
                         <div class="col-12 col-md-6 col-lg-6 col-xl-4 col-xxl-3 p-2">
@@ -26,7 +26,8 @@ Departments
                                             {% endif %}
                                         </h5>
                                         <div style="font-size: 1.5em; color: white;">
-                                            <a class="text-white" href="#">
+                                            <a class="text-white"
+                                            href="{{ url_for('delete_department', dep_id=department.id) }}">
                                                 <i class="mb-2 bi bi-x-square-fill"></i>
                                             </a>
                                         </div>
@@ -48,7 +49,7 @@ Departments
                     {% endfor %}
                 </div>
             {% else %}
-                <h5>Looks like database is clear, try to fill some data first</h5>
+                <h5>Looks like database is empty, try to fill some data first</h5>
                 <h6 style="color: red;">Could be a trouble with database also</h6>
             {% endif %}
 
