@@ -31,7 +31,9 @@ Test
             <div class="col-6">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item"><strong>Department</strong>: {{ employee.department.name }}</li>
-                    <li class="list-group-item"><strong>Birth date</strong>: {{ employee.birth_date }}</li>
+                    <li class="list-group-item"><strong>Birth date</strong>:
+                        {{ employee.birth_date.strftime('%Y-%m-%d') }}
+                    </li>
                 </ul>
             </div>
             <div class="col-6">

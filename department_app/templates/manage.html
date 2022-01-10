@@ -6,6 +6,87 @@ Test
 
 {% block body %}
 <div class="container">
-    <h5>Test Manage</h5>
+    <div class="mx-auto p-3 col-12 col-md-10 col-lg-8 border border-dark">
+        <!-- Department form -->
+        <form method="POST" action="">
+            {{ dep_form.hidden_tag() }}
+            <h4>Add a Department</h4>
+            <hr>
+            <div class="mb-3">
+                {{ dep_form.name.label(class="form-label") }}
+
+                {% if dep_form.name.errors %}
+                    {{ dep_form.name(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in dep_form.name.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                {% else %}
+                    {{ dep_form.name(class="form-control") }}
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                {{ dep_form.description.label(class="form-label") }}
+                {{ dep_form.description(class="form-control", rows="5") }}
+            </div>
+            <!--<div class="mb-3">
+                <label class="form-label">Choose a department picture(optional)</label>
+                <input class="form-control form-control-sm"  type="file">
+            </div>-->
+            {{ dep_form.submit(class="btn btn-warning") }}
+        </form>
+    </div>
+    <div class="mx-auto p-3 col-12 col-md-10 col-lg-8 border border-dark mt-5">
+        <!-- Employee form -->
+        <form method="POST" action="#error">
+            {{ emp_form.hidden_tag() }}
+            <h4>Add an Employee</h4>
+            <hr>
+            <div class="mb-3">
+                {{ emp_form.dep_id.label(class="form-label") }}
+                {{ emp_form.dep_id(class="form-select") }}
+            </div>
+            <div class="mb-3">
+                {{ emp_form.name.label(class="form-label") }}
+                {{ emp_form.name(class="form-control") }}
+            </div>
+            <div class="mb-3">
+                {{ emp_form.surname.label(class="form-label") }}
+                {{ emp_form.surname(class="form-control") }}
+            </div>
+            <div class="mb-3">
+                {{ emp_form.email.label(class="form-label") }}
+
+                {% if emp_form.email.errors %}
+                    {{ emp_form.email(class="form-control is-invalid") }}
+                        <div class="invalid-feedback" id="error">
+                            {% for error in emp_form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                {% else %}
+                    {{ emp_form.email(class="form-control") }}
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                {{ emp_form.brief_inf.label(class="form-label") }}
+                {{ emp_form.brief_inf(class="form-control", rows="3") }}
+            </div>
+            <div class="mb-3">
+                {{ emp_form.birth_date.label(class="form-label") }}
+                {{ emp_form.birth_date(class="form-control", value="2001-01-01") }}
+            </div>
+            <div class="mb-3">
+                {{ emp_form.salary.label(class="form-label") }}
+                {{ emp_form.salary(class="form-control") }}
+            </div>
+            <!--<div class="mb-3">
+                <label class="form-label">Choose an employee picture(optional)</label>
+                <input class="form-control form-control-sm" type="file">
+            </div>-->
+            {{ emp_form.submit(class="btn btn-warning") }}
+        </form>
+    </div>
 </div>
 {% endblock %}
