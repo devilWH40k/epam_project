@@ -27,6 +27,7 @@ Departments
                                         </h5>
                                         <div style="font-size: 1.5em; color: white;">
                                             <a class="text-white"
+                                            onClick="return window.confirm('{{ department.name }} will be deleted with all its employees. You confirm?');"
                                             href="{{ url_for('delete_department', dep_id=department.id) }}">
                                                 <i class="mb-2 bi bi-x-square-fill"></i>
                                             </a>

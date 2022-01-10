@@ -35,7 +35,9 @@ Test
 						    <div class="d-flex justify-content-between">
 				  			    <h5 class="align-self-end">{{ employee.name}} {{employee.surname[:1]}}.</h5>
 							    <div style="font-size: 1.5em; color: white;">
-				 				    <a class="text-white" href="{{ url_for('delete_employee', emp_id=employee.id) }}">
+				 				    <a class="text-white"
+                                    onClick="return window.confirm('{{ employee.name }} will be deleted. You confirm?');"
+                                    href="{{ url_for('delete_employee', emp_id=employee.id) }}">
 									    <i class="mb-2 bi bi-x-square-fill"></i>
 								    </a>
 				 			    </div>
