@@ -29,7 +29,7 @@ class EmployeeForm(FlaskForm):
 
     dep_id = SelectField('Works for?',
                          choices=[(dep.id, dep.name) for dep in Department.query.all()])
-    name = StringField('Name', validators=[DataRequired(), Length(min=2, max=25)])
+    emp_name = StringField('Name', validators=[DataRequired(), Length(min=2, max=25)])
     surname = StringField('Surname', validators=[DataRequired(), Length(min=2, max=25)])
     email = StringField('Email address', validators=[DataRequired(), Email()])
     brief_inf = TextAreaField('Brief resume', validators=[DataRequired()])

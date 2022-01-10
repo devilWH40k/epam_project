@@ -34,8 +34,8 @@ Departments
                                         </div>
                                     </div>
                                     <p class="card-text">
-                                        {% if department.description|length > 60 %}
-                                            {{ department.description[:60]}}...
+                                        {% if department.description|length > 45 %}
+                                            {{ department.description[:45]}}...
                                         {% else %}
                                             {{ department.description }}
                                         {% endif %}
