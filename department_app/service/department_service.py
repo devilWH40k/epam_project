@@ -14,11 +14,12 @@ def get_departments() -> 'list[dict]':
     return [department.to_dict() for department in departments]
 
 
-def add_department(name: str, description: str) -> None:
+def add_department(name: str, description: str) -> dict:
     """Creates department by given values, then adds to table
 
     :param name: value of name field
     :param description: value of description field
+    :return: dict of created department
     """
 
     department = Department(
@@ -27,6 +28,7 @@ def add_department(name: str, description: str) -> None:
     )
     db.session.add(department)
     db.session.commit()
+    return department.to_dict()
 
 
 def update_department(id, name: str, description: str) -> None:

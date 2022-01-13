@@ -7,3 +7,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
 
 from department_app.views import views
+
+from department_app.rest import api
+app.register_blueprint(api, url_prefix='/api')

@@ -17,7 +17,7 @@ def get_employees() -> 'list[dict]':
 
 def add_employee(name: str, surname: str, email: str,
                  brief_inf: str, birth_date: 'str',
-                 salary: int, dep_id: str) -> None:
+                 salary: int, dep_id: str) -> dict:
     """Creates employee by given values, then adds to table
 
     :param name: value of name field
@@ -27,6 +27,7 @@ def add_employee(name: str, surname: str, email: str,
     :param birth_date: value of birth_date field in '%Y-%m-%d'
     :param salary: value of salary field
     :param dep_id: value of dep_id field
+    :return: employee dict
     """
 
     date_list = list(map(int, birth_date.split('-')))
@@ -41,6 +42,7 @@ def add_employee(name: str, surname: str, email: str,
     )
     db.session.add(employee)
     db.session.commit()
+    return employee.to_dict()
 
 
 def update_employee(id: int, name: str, surname: str, email: str,
