@@ -1,106 +1,128 @@
 """Views module for app routing logic."""
-from department_app import app, db
+
+from department_app import app
 from flask import render_template, redirect, flash, url_for, request
-from department_app.models import Department, Employee
 from department_app.forms import DepartmentForm, EmployeeForm
+from department_app.service import department_service, employee_service
 
 
 @app.route("/")
 @app.route("/departments")
 def show_departments():
     """Main page with all departments in db."""
-    departments = Department.query.all()
+
+    departments = department_service.get_departments()
     return render_template('departments.html', departments=departments)
 
 
 @app.route("/departments/<dep_id>")
 def show_department(dep_id):
-    """Department page with its full information."""
-    department = Department.query.get_or_404(dep_id)
+    """Department page with its full information
+
+    :param dep_id: id of department
+    :return: rendered department page
+    """
+
+    department = department_service.get_department_by_id(dep_id)
+    department['average_salary'] = department_service.get_average_salary(department)
+    department['number'] = len(department['employees'])
     return render_template('department.html', department=department)
 
 
 @app.route("/departments/delete/<dep_id>")
 def delete_department(dep_id):
-    """Route for deleting the department and all related employees by department id.
+    """Route for deleting the department and all related employees by department id
 
+    :param dep_id: id of department
     Redirects to departments page after deleting.
     """
-    department = Department.query.get_or_404(dep_id)
-    for employee in department.employees:
-        db.session.delete(employee)
-    db.session.delete(department)
-    db.session.commit()
-    flash(f'{department.name} was successfully deleted!', category='success')
 
-    # redirecting to main page with departments after deleting
+    department = department_service.get_department_by_id(dep_id)
+    for employee in department['employees']:
+        employee_service.delete_employee(employee['id'])
+    department_service.delete_department(department['id'])
+    dep_name = department['name']
+    flash(f'{dep_name} was successfully deleted!', category='success')
     return redirect(url_for('show_departments'))
 
 
 @app.route("/employees/<dep_id>")
 def show_employees(dep_id):
-    """Route for page with employees from chosen department."""
-    department = Department.query.get_or_404(dep_id)
-    employees = department.employees
-    return render_template('employees.html', employees=employees, dep_name=department.name)
+    """Route for page with employees from chosen department
+
+    :param dep_id: id of department
+    :return: rendered employees page
+    """
+
+    department = department_service.get_department_by_id(dep_id)
+    employees = department['employees']
+    return render_template('employees.html', employees=employees, dep_name=department['name'])
 
 
 @app.route("/employee/<emp_id>")
 def show_employee(emp_id):
-    """Route for employee page got by his id."""
-    employee = Employee.query.get_or_404(emp_id)
+    """Route for employee page got by his id.
+
+    :param emp_id: id of employee
+    :return: rendered employee page
+    """
+
+    employee = employee_service.get_employee_by_id(emp_id)
     return render_template('employee.html', employee=employee)
 
 
 @app.route("/employee/delete/<emp_id>")
 def delete_employee(emp_id):
-    """Route for deleting employee by his id.
+    """Route for deleting employee by his id
 
+    :param emp_id: id of employee
     Redirects to employees page after deleting.
     """
-    employee = Employee.query.get_or_404(emp_id)
-    db.session.delete(employee)
-    db.session.commit()
-    flash(f'{employee.name} {employee.surname[0]}. was successfully deleted!', category='success')
+
+    employee = employee_service.get_employee_by_id(emp_id)
+    employee_service.delete_employee(employee['id'])
+    emp_name, emp_surname = employee['name'], employee['surname']
+    flash(f'{emp_name} {emp_surname[0]}. was successfully deleted!', category='success')
 
     # redirecting to the employees page
-    return redirect(url_for('show_employees', dep_id=employee.dep_id))
+    return redirect(url_for('show_employees', dep_id=employee['dep_id']))
 
 
 @app.route("/manage", methods=['POST', 'GET'])
 def manage():
-    """Page with forms for adding departments and employees to database.
+    """Page with forms for adding departments and employees to database
 
+    Firstly validates the forms.
     After POST request from the department's form redirects to departments page.
     In case with the employee's form redirects to employees page.
+    Releases the flash messages after success.
+    :return: rendered manage page
     """
+
     dep_form = DepartmentForm()
     emp_form = EmployeeForm()
+
     # for avoiding both forms validation
     if request.form.get('description'):
         if dep_form.validate_on_submit():
-            department = Department(
-                name=dep_form.name.data,
-                description=dep_form.description.data
+            department_service.add_department(
+                dep_form.name.data,
+                dep_form.description.data
             )
-            db.session.add(department)
-            db.session.commit()
-            flash(f'{department.name} was successfully created!', category='success')
+            flash(f'{dep_form.name.data} was successfully created!', category='success')
             return redirect(url_for('show_departments'))
     else:
         if emp_form.validate_on_submit():
-            employee = Employee(
-                name=emp_form.emp_name.data,
-                surname=emp_form.surname.data,
-                email=emp_form.email.data,
-                brief_inf=emp_form.brief_inf.data,
-                birth_date=emp_form.birth_date.data,
-                salary=emp_form.salary.data,
-                dep_id=emp_form.dep_id.data
+            employee_service.add_employee(
+                emp_form.emp_name.data,
+                emp_form.surname.data,
+                emp_form.email.data,
+                emp_form.brief_inf.data,
+                emp_form.birth_date.data.strftime('%Y-%m-%d'),
+                emp_form.salary.data,
+                emp_form.dep_id.data
             )
-            db.session.add(employee)
-            db.session.commit()
-            flash(f'{employee.name} {employee.surname[0]}. was successfully added to {employee.department.name}!',
+            flash(f'{emp_form.emp_name.data} {emp_form.surname.data[0]}. was successfully added!',
                   category='success')
-            return redirect(url_for('show_employees', dep_id=employee.dep_id))
+            return redirect(url_for('show_employees', dep_id=emp_form.dep_id.data))
     return render_template('manage.html', dep_form=dep_form, emp_form=emp_form)

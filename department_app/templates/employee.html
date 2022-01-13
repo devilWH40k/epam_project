@@ -9,7 +9,7 @@ Test
         <h2 class="align-self-center">{{  employee.name }} {{  employee.surname }}</h2>
         <button type="button" class="btn btn-success ms-auto d-flex" style="height: 34px">
             <a class="nav-link text-white align-self-center"
-            href="{{ url_for('show_employees', dep_id=employee.department.id) }}">
+            href="{{ url_for('show_employees', dep_id=employee.dep_id) }}">
                 Back
             </a>
         </button>
@@ -30,9 +30,9 @@ Test
         <div class="row p-3">
             <div class="col-6">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><strong>Department</strong>: {{ employee.department.name }}</li>
+                    <li class="list-group-item"><strong>Department</strong>: {{ employee.department }}</li>
                     <li class="list-group-item"><strong>Birth date</strong>:
-                        {{ employee.birth_date.strftime('%Y-%m-%d') }}
+                        {{ employee.birth_date }}
                     </li>
                 </ul>
             </div>
