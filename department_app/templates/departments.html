@@ -28,7 +28,7 @@ Departments
                                         <div style="font-size: 1.5em; color: white;">
                                             <a class="text-white"
                                             onClick="return window.confirm('{{ department.name }} will be deleted with all its employees. You confirm?');"
-                                            href="{{ url_for('delete_department', dep_id=department.id) }}">
+                                            href="{{ url_for('main.delete_department', dep_id=department.id) }}">
                                                 <i class="mb-2 bi bi-x-square-fill"></i>
                                             </a>
                                         </div>
@@ -41,11 +41,11 @@ Departments
                                         {% endif %}
                                     </p>
                                     <div class="d-flex justify-content-between">
-                                        <a href="{{ url_for('show_department', dep_id=department.id) }}"
+                                        <a href="{{ url_for('main.show_department', dep_id=department.id) }}"
                                         class="my-link card-link text-warning">
                                             Department link
                                         </a>
-                                        <a href="{{ url_for('show_employees', dep_id=department.id) }}"
+                                        <a href="{{ url_for('main.show_employees', dep_id=department.id) }}"
                                         class="my-link card-link text-warning">
                                             Employees
                                         </a>

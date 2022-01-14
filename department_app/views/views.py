@@ -1,13 +1,12 @@
 """Views module for app routing logic."""
 
-from department_app import app
 from flask import render_template, redirect, flash, url_for, request
-from department_app.forms import DepartmentForm, EmployeeForm
 from department_app.service import department_service, employee_service
+from department_app.views import main
 
 
-@app.route("/")
-@app.route("/departments")
+@main.route("/")
+@main.route("/departments")
 def show_departments():
     """Main page with all departments in db."""
 
@@ -15,7 +14,7 @@ def show_departments():
     return render_template('departments.html', departments=departments)
 
 
-@app.route("/departments/<dep_id>")
+@main.route("/departments/<dep_id>")
 def show_department(dep_id):
     """Department page with its full information
 
@@ -29,7 +28,7 @@ def show_department(dep_id):
     return render_template('department.html', department=department)
 
 
-@app.route("/departments/delete/<dep_id>")
+@main.route("/departments/delete/<dep_id>")
 def delete_department(dep_id):
     """Route for deleting the department and all related employees by department id
 
@@ -43,10 +42,10 @@ def delete_department(dep_id):
     department_service.delete_department(department['id'])
     dep_name = department['name']
     flash(f'{dep_name} was successfully deleted!', category='success')
-    return redirect(url_for('show_departments'))
+    return redirect(url_for('main.show_departments'))
 
 
-@app.route("/employees/<dep_id>")
+@main.route("/employees/<dep_id>")
 def show_employees(dep_id):
     """Route for page with employees from chosen department
 
@@ -59,7 +58,7 @@ def show_employees(dep_id):
     return render_template('employees.html', employees=employees, dep_name=department['name'])
 
 
-@app.route("/employee/<emp_id>")
+@main.route("/employee/<emp_id>")
 def show_employee(emp_id):
     """Route for employee page got by his id.
 
@@ -71,7 +70,7 @@ def show_employee(emp_id):
     return render_template('employee.html', employee=employee)
 
 
-@app.route("/employee/delete/<emp_id>")
+@main.route("/employee/delete/<emp_id>")
 def delete_employee(emp_id):
     """Route for deleting employee by his id
 
@@ -85,10 +84,10 @@ def delete_employee(emp_id):
     flash(f'{emp_name} {emp_surname[0]}. was successfully deleted!', category='success')
 
     # redirecting to the employees page
-    return redirect(url_for('show_employees', dep_id=employee['dep_id']))
+    return redirect(url_for('main.show_employees', dep_id=employee['dep_id']))
 
 
-@app.route("/manage", methods=['POST', 'GET'])
+@main.route("/manage", methods=['POST', 'GET'])
 def manage():
     """Page with forms for adding departments and employees to database
 
@@ -98,6 +97,7 @@ def manage():
     Releases the flash messages after success.
     :return: rendered manage page
     """
+    from department_app.forms import DepartmentForm, EmployeeForm
 
     dep_form = DepartmentForm()
     emp_form = EmployeeForm()
@@ -110,7 +110,7 @@ def manage():
                 dep_form.description.data
             )
             flash(f'{dep_form.name.data} was successfully created!', category='success')
-            return redirect(url_for('show_departments'))
+            return redirect(url_for('main.show_departments'))
     else:
         if emp_form.validate_on_submit():
             employee_service.add_employee(
@@ -124,5 +124,5 @@ def manage():
             )
             flash(f'{emp_form.emp_name.data} {emp_form.surname.data[0]}. was successfully added!',
                   category='success')
-            return redirect(url_for('show_employees', dep_id=emp_form.dep_id.data))
+            return redirect(url_for('main.show_employees', dep_id=emp_form.dep_id.data))
     return render_template('manage.html', dep_form=dep_form, emp_form=emp_form)

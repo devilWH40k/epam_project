@@ -9,7 +9,7 @@ Test
         <h2 class="align-self-center">{{  employee.name }} {{  employee.surname }}</h2>
         <button type="button" class="btn btn-success ms-auto d-flex" style="height: 34px">
             <a class="nav-link text-white align-self-center"
-            href="{{ url_for('show_employees', dep_id=employee.dep_id) }}">
+            href="{{ url_for('main.show_employees', dep_id=employee.dep_id) }}">
                 Back
             </a>
         </button>

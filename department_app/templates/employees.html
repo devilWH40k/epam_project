@@ -8,7 +8,7 @@ Test
     <div class="d-flex">
         <h2 class="align-self-center">Welcome to employees page!</h2>
         <button type="button" class="btn btn-success ms-auto d-flex" style="height: 34px">
-            <a class="nav-link text-white align-self-center" href="{{ url_for('show_departments') }}">Back</a>
+            <a class="nav-link text-white align-self-center" href="{{ url_for('main.show_departments') }}">Back</a>
         </button>
     </div>
     <hr>
@@ -37,7 +37,7 @@ Test
 							    <div style="font-size: 1.5em; color: white;">
 				 				    <a class="text-white"
                                     onClick="return window.confirm('{{ employee.name }} will be deleted. You confirm?');"
-                                    href="{{ url_for('delete_employee', emp_id=employee.id) }}">
+                                    href="{{ url_for('main.delete_employee', emp_id=employee.id) }}">
 									    <i class="mb-2 bi bi-x-square-fill"></i>
 								    </a>
 				 			    </div>
@@ -50,7 +50,7 @@ Test
                                 {% endif %}
                             </p>
                             <p class="card-text">{{ employee.email }}</p>
-						    <a href="{{ url_for('show_employee', emp_id=employee.id) }}" class="card-link text-warning">
+						    <a href="{{ url_for('main.show_employee', emp_id=employee.id) }}" class="card-link text-warning">
                                 Employee link
                             </a>
 					    </div>
