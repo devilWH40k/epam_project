@@ -50,14 +50,15 @@ If you have another OS visit this ----> **[page]**
     ```sh
     $ pip install -r requirements.txt
     ```
-5. Run the application:
-    ```sh
-    $ flask run
-    ```   
-6. Fill the database with some random data, otherwise you will have nothing to work with:
+5. Fill the database with some random data, otherwise you will have nothing to work with:
     ```sh
     $ python3 data.py
     ``` 
+6. Run the application:
+    ```sh
+    $ flask run
+    ```
+   
 -------------
 **After these steps you shoud see something like that:**
 
@@ -68,6 +69,55 @@ If you have another OS visit this ----> **[page]**
 # REST API operations
 
 -------------
-to be continued...
+**api/departments**
+- GET: to get all departments in json format
+- POST: to add a new department
+    ```sh
+    {"name": "Name", "description": "Some description"}
+    ```
+-------------
+**api/departments/id**
+- GET: to get the department by its id in json format
+- PUT: to completely update the department
+    ```sh
+    {"name": "New name", "description": "Some new description"}
+    ```
+- PATCH: to update only specified fields of department
+    ```sh
+    {"name": "New name"}
+    ```
+  or
+    ```sh
+    {"description": "Some new description"}
+    ```
+- DELETE: to delete the department by id
+-------------
+**api/employees**
+- GET: to get all employees in json format
+- POST: to add a new employee
+    ```sh
+    {"name": "Name", "surname": "Surname", "email": "test@gmail.com", 
+    "brief_inf": "some brief info", "birth_date": "2001-03-02",
+    "salary": 1000, "dep_id": "1"}
+    ```
+-------------
+**api/departments/id**
+- GET: to get the employee by id in json format
+- PUT: to completely update the employee
+    ```sh
+    {"name": "New ame", "surname": "New Surname", "email": "new_test@gmail.com", 
+    "brief_inf": "some new brief info", "birth_date": "2001-03-02",
+    "salary": 1000, "dep_id": "1"}
+    ```
+- PATCH: to update only specified fields of employee
+    ```sh
+    {"name": "New ame", "surname": "New Surname"}
+    ```
+  or anything else you want to update
+    ```sh
+    {"birth_date": "2001-03-02", "salary": 1000}
+    ```
+- DELETE: to delete the employee by id
+
 
 [page]: <https://www.servermania.com/kb/articles/install-sqlite/>
