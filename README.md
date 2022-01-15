@@ -1,6 +1,5 @@
 # Department App
 
--------------
 Department app is quite simple web application for managing departments and its employees also.
 It uses a RESTful service to perform CRUD and some other useful operations. There are a couple
 of actions user is allowed to do:
@@ -13,7 +12,6 @@ of actions user is allowed to do:
 
 ## Preinstall usages
 
--------------
 You need to have Python 3.6+ installed, also app uses the sqlite3 database, to install sqlite db on
 Linux follow commands down there.
 
@@ -32,7 +30,6 @@ If you have another OS visit this ----> **[page]**
 
 # Deployment
 
--------------
 1. Clone the repository:
     ```sh
     $ git clone https://github.com/devilWH40k/epam_project.git
@@ -68,7 +65,6 @@ If you have another OS visit this ----> **[page]**
 
 # REST API operations
 
--------------
 **api/departments**
 - GET: to get all departments in json format
 - POST: to add a new department
