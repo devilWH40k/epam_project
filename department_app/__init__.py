@@ -5,9 +5,13 @@ from department_app.config import Config
 db = SQLAlchemy()
 
 
-def create_app():
+def create_app(test_config=None):
     app = Flask(__name__, template_folder='templates', static_folder='static')
-    app.config.from_object(Config)
+
+    if test_config:
+        app.config.from_object(test_config)
+    else:
+        app.config.from_object(Config)
 
     db.init_app(app)
 

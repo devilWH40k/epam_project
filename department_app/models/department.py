@@ -10,7 +10,7 @@ class Department(db.Model):
     name = db.Column(db.String(50), unique=True, nullable=False)
     description = db.Column(db.Text, nullable=False)
     image_file = db.Column(db.String(40), nullable=False, default='default_dep_img/default.png')
-    employees = db.relationship('Employee', backref='department', lazy='dynamic')
+    employees = db.relationship('Employee', backref='department', lazy=True)
 
     def to_dict(self):
         """Serializer that returns a dictionary from employee fields

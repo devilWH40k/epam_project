@@ -51,7 +51,12 @@ If you have another OS visit this ----> **[page]**
     ```sh
     $ python3 data.py
     ``` 
-6. Run the application:
+6. Run the application in development mode by setting flask environment variables:
+    ```sh
+    $ export FLASK_ENV=development
+    $ flask run
+    ```
+   or you can run the application in production mode:
     ```sh
     $ flask run
     ```
