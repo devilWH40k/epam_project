@@ -46,7 +46,7 @@ class TestDepartmentService(BaseTestCase):
         department = Department(name='Test', description='some desc')
         db.session.add(department)
         db.session.commit()
-        department_service.update_department(id=department.id, name='Update Test',
+        department_service.update_department(id_=department.id, name='Update Test',
                                              description='some upd desc')
         upd_department = Department.query.filter_by(id=department.id).first()
         self.assertTupleEqual(('Update Test', 'some upd desc'),
@@ -62,7 +62,8 @@ class TestDepartmentService(BaseTestCase):
         department = Department(name='Test', description='some desc')
         db.session.add(department)
         db.session.commit()
-        department_service.patch_update_department(id=department.id, name='PatchTest', description=None)
+        department_service.patch_update_department(id_=department.id,
+                                                   name='PatchTest', description=None)
         ptch_department = Department.query.filter_by(id=department.id).first()
         self.assertTupleEqual(('PatchTest', 'some desc'),
                               (ptch_department.name, ptch_department.description))

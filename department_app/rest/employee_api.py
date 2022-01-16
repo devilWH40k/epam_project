@@ -104,9 +104,3 @@ def delete_employee(emp_id):
 
     employee_service.delete_employee(emp_id)
     return jsonify({'message': 'Employee has been deleted'}), 200
-
-
-
-
-
-

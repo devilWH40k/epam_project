@@ -31,30 +31,30 @@ def add_department(name: str, description: str) -> dict:
     return department.to_dict()
 
 
-def update_department(id, name: str, description: str) -> None:
+def update_department(id_, name: str, description: str) -> None:
     """Updates all fields of department by its id
 
-    :param id: id of department
+    :param id_: id of department
     :param name: value of name field for update
     :param description: value of description field for update
     """
 
-    department = Department.query.get_or_404(id)
+    department = Department.query.get_or_404(id_)
     department.name = name
     department.description = description
     db.session.add(department)
     db.session.commit()
 
 
-def patch_update_department(id, name: str, description: str) -> None:
+def patch_update_department(id_, name: str, description: str) -> None:
     """Updates only specified department fields
 
-    :param id: id of department
+    :param id_: id of department
     :param name: value of name field for update
     :param description: value of description field for update
     """
 
-    department = Department.query.get_or_404(id)
+    department = Department.query.get_or_404(id_)
     if name:
         department.name = name
     elif description:
@@ -63,25 +63,25 @@ def patch_update_department(id, name: str, description: str) -> None:
     db.session.commit()
 
 
-def delete_department(id) -> None:
+def delete_department(id_) -> None:
     """Deletes department by its id
 
-    :param id: id of department
+    :param id_: id of department
     """
 
-    department = Department.query.get_or_404(id)
+    department = Department.query.get_or_404(id_)
     db.session.delete(department)
     db.session.commit()
 
 
-def get_department_by_id(id) -> dict:
+def get_department_by_id(id_) -> dict:
     """Reads a department from table by id
 
-    :param id: id of department
+    :param id_: id of department
     :return: department dict
     """
 
-    department = Department.query.get_or_404(id)
+    department = Department.query.get_or_404(id_)
     return department.to_dict()
 
 

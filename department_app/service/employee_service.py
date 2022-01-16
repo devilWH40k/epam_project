@@ -45,12 +45,12 @@ def add_employee(name: str, surname: str, email: str,
     return employee.to_dict()
 
 
-def update_employee(id: int, name: str, surname: str, email: str,
+def update_employee(id_: int, name: str, surname: str, email: str,
                     brief_inf: str, birth_date: str,
                     salary: int, dep_id: str) -> None:
     """Updates all fields of department by its id
 
-    :param id: id of employee
+    :param id_: id of employee
     :param name: value of name field
     :param surname: value of surname field
     :param email: value of email field
@@ -61,7 +61,7 @@ def update_employee(id: int, name: str, surname: str, email: str,
     """
 
     date_list = list(map(int, birth_date.split('-')))
-    employee = Employee.query.get_or_404(id)
+    employee = Employee.query.get_or_404(id_)
     employee.name = name
     employee.surname = surname
     employee.email = email
@@ -73,12 +73,12 @@ def update_employee(id: int, name: str, surname: str, email: str,
     db.session.commit()
 
 
-def patch_update_employee(id: int, name: str, surname: str, email: str,
-                    brief_inf: str, birth_date: str,
-                    salary: int, dep_id: str) -> None:
+def patch_update_employee(id_: int, name: str, surname: str, email: str,
+                          brief_inf: str, birth_date: str,
+                          salary: int, dep_id: str) -> None:
     """Updates only specified employee fields
 
-    :param id: id of employee
+    :param id_: id of employee
     :param name: value of name field
     :param surname: value of surname field
     :param email: value of email field
@@ -88,7 +88,7 @@ def patch_update_employee(id: int, name: str, surname: str, email: str,
     :param dep_id: value of dep_id field
     """
 
-    employee = Employee.query.get_or_404(id)
+    employee = Employee.query.get_or_404(id_)
     if name:
         employee.name = name
     elif surname:
@@ -108,25 +108,23 @@ def patch_update_employee(id: int, name: str, surname: str, email: str,
     db.session.commit()
 
 
-def delete_employee(id) -> None:
+def delete_employee(id_) -> None:
     """Deletes employee by its id
 
-    :param id: id of employee
+    :param id_: id of employee
     """
 
-    employee = Employee.query.get_or_404(id)
+    employee = Employee.query.get_or_404(id_)
     db.session.delete(employee)
     db.session.commit()
 
 
-def get_employee_by_id(id) -> dict:
+def get_employee_by_id(id_) -> dict:
     """Reads an employee from table by id
 
-    :param id: id of employee
+    :param id_: id of employee
     :return: employee dict
     """
 
-    employee = Employee.query.get_or_404(id)
+    employee = Employee.query.get_or_404(id_)
     return employee.to_dict()
-
-

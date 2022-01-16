@@ -1,3 +1,5 @@
+"""__init__ file of application."""
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from department_app.config import Config
@@ -6,6 +8,11 @@ db = SQLAlchemy()
 
 
 def create_app(test_config=None):
+    """App fabric
+
+    :param test_config: for testing configuration
+    :return: created app
+    """
     app = Flask(__name__, template_folder='templates', static_folder='static')
 
     if test_config:

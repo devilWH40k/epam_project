@@ -87,4 +87,3 @@ def delete_department(dep_id):
         employee_service.delete_employee(employee['id'])
     department_service.delete_department(department['id'])
     return jsonify({'message': 'Department has been deleted'}), 200
-

@@ -1,9 +1,9 @@
 """Module for testing department model"""
 
+import datetime
 from department_app import db
 from department_app.models import Department, Employee
 from department_app.tests.conftest import BaseTestCase
-import datetime
 
 
 class TestEmployeeModel(BaseTestCase):

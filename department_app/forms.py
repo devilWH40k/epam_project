@@ -51,5 +51,3 @@ class EmployeeForm(FlaskForm):
         validate_email = Employee.query.filter_by(email=email.data).first()
         if validate_email:
             raise ValidationError('That email is taken. Please choose a different one.')
-
-
