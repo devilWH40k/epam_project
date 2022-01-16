@@ -1,4 +1,4 @@
-#Department App
+# Department App
 
 The main purpose of this application is managing departments online by using
 web browser on computer or smartphone. This site provides such functionality as:
