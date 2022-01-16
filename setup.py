@@ -15,5 +15,5 @@ setup(
         'py-loremipsum==1.1.0'
     ],
     include_package_data=True,
-    packages=find_packages()
+    packages=find_packages(exclude=['tests*'])
 )
