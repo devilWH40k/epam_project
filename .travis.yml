@@ -5,7 +5,7 @@ install:
 
 script:
   - python3 -m unittest discover
-  - pylint -d E1101,C0413,C0415,R0401 department_app
+  - pylint -d E1101,C0413,C0415,R0401,R0903,R0201,R0913 department_app
 
 after_success:
   - coveralls

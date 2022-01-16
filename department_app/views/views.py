@@ -37,10 +37,10 @@ def delete_department(dep_id):
     """
 
     department = department_service.get_department_by_id(dep_id)
-    for employee in department['employees']:
-        employee_service.delete_employee(employee['id'])
-    department_service.delete_department(department['id'])
-    dep_name = department['name']
+    for employee in department.get('employees'):
+        employee_service.delete_employee(employee.get('id'))
+    department_service.delete_department(department.get('id'))
+    dep_name = department.get('name')
     flash(f'{dep_name} was successfully deleted!', category='success')
     return redirect(url_for('main.show_departments'))
 
