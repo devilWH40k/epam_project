@@ -1,4 +1,6 @@
-# Department App
+# Department App 
+[![Build Status](https://app.travis-ci.com/devilWH40k/epam_project.svg?branch=main)](https://app.travis-ci.com/devilWH40k/epam_project)
+[![Coverage Status](https://coveralls.io/repos/github/devilWH40k/epam_project/badge.svg)](https://coveralls.io/github/devilWH40k/epam_project)
 
 Department app is quite simple web application for managing departments and its employees also.
 It uses a RESTful service to perform CRUD and some other useful operations. There are a couple
@@ -51,16 +53,16 @@ If you have another OS visit this ----> **[page]**
     ```sh
     $ python3 data.py
     ``` 
-6. Run the application in development mode by setting flask environment variables:
+6. Run the application in development mode by setting flask environment variables(http://127.0.0.1:5000 ):
     ```sh
     $ export FLASK_ENV=development
     $ flask run
     ```
-   or you can run the application in production mode:
+   or you can run the application in production mode with gunicorn:
     ```sh
-    $ flask run
+    $ gunicorn -w 4 "department_app:create_app()"
     ```
-   
+   will be available at http://127.0.0.1:8000 
 -------------
 **After these steps you shoud see something like that:**
 
