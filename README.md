@@ -14,7 +14,7 @@ of actions user is allowed to do:
 
 ## Preinstall usages
 
-You need to have Python 3.6+ installed, also app uses the sqlite3 database, to install sqlite db on
+You need to have Python 3.8+ installed, also app uses the sqlite3 database, to install sqlite db on
 Linux follow commands down there.
 
 **(Debian/Ubuntu)**
